@@ -23,6 +23,8 @@ when 'package'
   package node['certbot']['package']
 when 'certbot-auto'
   remote_file node['certbot']['bin'] do
+    action :create_if_missing
+    atomic_update false
     source 'https://dl.eff.org/certbot-auto'
     mode 0755
   end
