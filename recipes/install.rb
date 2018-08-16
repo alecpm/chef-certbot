@@ -33,7 +33,7 @@ when 'certbot-auto'
   remote_file node['certbot']['bin'] do
     action :create_if_missing
     atomic_update false
-    source ['https://raw.githubusercontent.com/certbot/certbot/v0.10.1/letsencrypt-auto-source/letsencrypt-auto', 'https://dl.eff.org/certbot-auto']
+    source ['https://dl.eff.org/certbot-auto', 'https://raw.githubusercontent.com/certbot/certbot/v0.26.1/letsencrypt-auto-source/letsencrypt-auto']
     mode 0755
     use_conditional_get false
   end
