@@ -10,3 +10,4 @@ depends 'apache2'
 depends 'cron'
 depends 'nginx'
 depends 'yum-epel'
+depends "apt"
