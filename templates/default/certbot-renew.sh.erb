@@ -6,7 +6,7 @@ rm -f $UPDATE_FLAG_FILE
 su - <%=node['certbot']['sandbox']['user'] %> -c "<%= node['certbot']['bin'] %> renew --post-hook \"touch $UPDATE_FLAG_FILE\""
 <% else -%>
 <%= node['certbot']['bin'] %> renew --post-hook "touch $UPDATE_FLAG_FILE"
-<% end -%> 
+<% end -%>
 
 if [ $? -gt 0 ]; then
   exit $?
@@ -19,14 +19,10 @@ fi
 <% @services.each do |service, action|
   next unless action -%>
 
-service <%=service %> status
-
-if [ $? -eq 0 ]; then
-  service <%=service %> <%=action %>
-  if [ $? -gt 0 ]; then
-    >&2 echo failed to <%=action %> <%=service %>
-    exit 1
-  fi
+service <%=service %> <%=action %>
+if [ $? -gt 0 ]; then
+  >&2 echo failed to <%=action %> <%=service %>
+  exit 1
 fi
 
 <% end -%>
